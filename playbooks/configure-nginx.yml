@@ -1,0 +1,31 @@
+---
+- name: Configure Nginx with Ansible Handlers
+  hosts: webservers
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Deploy custom Nginx configuration
+      ansible.builtin.copy:
+        dest: /etc/nginx/conf.d/ansible-project.conf
+        content: |
+          server {
+              listen 80;
+              server_name richard.local;
+              root /var/www/html;
+              index index.html;
+
+              location / {
+                  try_files $uri $uri/ =404;
+              }
+          }
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted

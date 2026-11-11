@@ -1,0 +1,20 @@
+---
+- name: Manage Automation Users
+  hosts: webservers
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Create ansibleadmin user
+      ansible.builtin.user:
+        name: ansibleadmin
+        comment: Ansible Automation Administrator
+        shell: /bin/bash
+        create_home: true
+        state: present
+
+    - name: Add ansibleadmin to sudo group
+      ansible.builtin.user:
+        name: ansibleadmin
+        groups: sudo
+        append: true

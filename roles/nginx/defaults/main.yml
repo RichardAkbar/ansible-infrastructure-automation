@@ -1,0 +1,8 @@
+---
+nginx_package: nginx
+nginx_service: nginx
+nginx_document_root: /var/www/html
+nginx_server_name: richard.local
+
+website_title: Richard Infrastructure
+website_heading: Ansible Infrastructure Automation

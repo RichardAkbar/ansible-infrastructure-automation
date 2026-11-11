@@ -1,0 +1,7 @@
+*.swp
+*.swo
+*.retry
+__pycache__/
+*.pyc
+.env
+.vault_pass

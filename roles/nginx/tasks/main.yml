@@ -1,0 +1,44 @@
+---
+- name: Update apt package cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install Nginx
+  ansible.builtin.apt:
+    name: "{{ nginx_package }}"
+    state: present
+
+- name: Deploy custom Nginx configuration
+  ansible.builtin.copy:
+    dest: /etc/nginx/conf.d/ansible-project.conf
+    content: |
+      server {
+          listen 80;
+          server_name {{ nginx_server_name }};
+          root {{ nginx_document_root }};
+          index index.html;
+
+          location / {
+              try_files $uri $uri/ =404;
+          }
+      }
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Nginx
+
+- name: Deploy website template
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: "{{ nginx_document_root }}/index.html"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Nginx
+
+- name: Ensure Nginx is started and enabled
+  ansible.builtin.service:
+    name: "{{ nginx_service }}"
+    state: started
+    enabled: true

@@ -1,0 +1,24 @@
+---
+- name: Deploy Website Using Jinja2 Template
+  hosts: webservers
+  become: true
+  gather_facts: true
+
+  vars:
+    website_title: "Ansible Infrastructure Automation"
+    website_heading: "Welcome to Our Automated Infrastructure"
+
+  tasks:
+    - name: Deploy website using Jinja2 template
+      ansible.builtin.template:
+        src: ../templates/index.html.j2
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Ensure Nginx is running
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ website_title }}</title>
+</head>
+<body>
+    <h1>{{ website_heading }}</h1>
+    <h2>Infrastructure Engineer: Richard</h2>
+    <h3>Server: {{ inventory_hostname }}</h3>
+    <p>Operating System: {{ ansible_distribution }} {{ ansible_distribution_version }}</p>
+    <p>This server is managed automatically using Ansible and Jinja2.</p>
+    <footer>
+        <p>Project: Richard's Ansible Infrastructure Automation</p>
+    </footer>
+</body>
+</html>

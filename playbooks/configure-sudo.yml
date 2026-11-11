@@ -1,0 +1,15 @@
+---
+- name: Configure Sudo Access
+  hosts: webservers
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Configure passwordless sudo for ansibleadmin
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/ansibleadmin
+        content: "ansibleadmin ALL=(ALL) NOPASSWD: ALL\n"
+        owner: root
+        group: root
+        mode: '0440'
+        validate: '/usr/sbin/visudo -cf %s'
