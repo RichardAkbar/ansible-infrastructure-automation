@@ -225,7 +225,7 @@ ansible webservers -m command -a "curl -s http://localhost"
 
 Gambar berikut memperlihatkan hasil deployment website menggunakan Jinja2 Template pada Web1 dan Web2. Website berhasil menampilkan judul Richard Infrastructure, informasi Infrastructure Engineer, hostname, serta informasi sistem operasi secara dinamis sesuai identitas masing-masing server.
 
-![Jinja2 Website Deployment](docs/screenshots/03-jinja2-website-deployment.png)
+![alt text](<4. jinja.png>)
 
 ---
 
@@ -266,7 +266,7 @@ ansible webservers -m command -a "ss -tlnp"
 
 Gambar berikut menunjukkan penerapan konfigurasi virtual host Nginx pada managed servers. Bukti implementasi mencakup pemeriksaan sintaks konfigurasi menggunakan `nginx -t`, validasi listening port, serta penerapan Ansible Handler untuk mengelola restart service ketika terjadi perubahan konfigurasi.
 
-![Nginx Configuration](docs/screenshots/04-nginx-configuration.png)
+![alt text](<5. ansible considler.png>)
 
 ---
 
@@ -298,8 +298,7 @@ ansible webservers -m command -a "id ansibleadmin"
 **Dokumentasi Screenshot – User Management**
 
 Gambar berikut memperlihatkan proses pembuatan akun administrator menggunakan Ansible serta hasil verifikasi informasi user `ansibleadmin` pada kedua managed servers. Pemeriksaan mencakup UID, GID, grup, home directory, dan konfigurasi shell akun.
-
-![User Management](docs/screenshots/05-user-management.png)
+![alt text](<6. user management.png>)
 
 #### B. Sudo Configuration
 
@@ -334,11 +333,6 @@ ansible webservers -m command -a "su - ansibleadmin -c 'sudo -n whoami'"
 - Permission file adalah `440`.
 - Passwordless sudo berhasil diverifikasi.
 
-**Dokumentasi Screenshot – Sudo Configuration**
-
-Gambar berikut memperlihatkan hasil konfigurasi sudoers untuk akun `ansibleadmin`. Validasi dilakukan melalui pemeriksaan sintaks menggunakan `visudo -c`, pemeriksaan ownership dan permission file, serta pengujian passwordless sudo pada managed servers.
-
-![Sudo Configuration](docs/screenshots/06-sudo-configuration.png)
 
 ---
 
@@ -403,17 +397,10 @@ ansible-playbook playbooks/use-nginx-role.yml
 - Service Nginx berjalan.
 - Handler dijalankan ketika terdapat perubahan yang memerlukan restart.
 
-**Dokumentasi Screenshot – Ansible Role Structure**
-
-Gambar berikut memperlihatkan struktur direktori Ansible Role Nginx yang telah dibuat menggunakan Ansible Galaxy. Struktur ini memisahkan tasks, handlers, defaults, templates, meta, dan vars agar konfigurasi lebih modular dan mudah digunakan kembali.
-
-![Ansible Role Structure](docs/screenshots/07-ansible-role-structure.png)
-
 **Dokumentasi Screenshot – Ansible Role Execution**
 
 Gambar berikut menunjukkan proses pemanggilan dan eksekusi Ansible Role melalui playbook `use-nginx-role.yml`. Eksekusi ini menerapkan konfigurasi Nginx dan deployment template pada kedua managed servers.
-
-![Ansible Role Execution](docs/screenshots/08-ansible-role-execution.png)
+![alt text](<7. ansible role.png>)
 
 ---
 
@@ -451,8 +438,8 @@ Hasil `changed=0` menunjukkan bahwa eksekusi kedua tidak menghasilkan perubahan 
 **Dokumentasi Screenshot – Idempotency Testing**
 
 Gambar berikut memperlihatkan hasil eksekusi kedua playbook Nginx Role beserta bagian `PLAY RECAP`. Hasil pengujian menunjukkan Web1 dan Web2 masing-masing memperoleh `changed=0` dan `failed=0`, yang membuktikan bahwa konfigurasi berjalan secara idempotent pada skenario pengujian tersebut.
+![alt text](<9. indopetency.png>)
 
-![Idempotency Testing](docs/screenshots/09-idempotency-testing.png)
 
 ---
 
@@ -516,8 +503,7 @@ ansible webservers -m command -a "curl -s -o /dev/null -w 'HTTP Status: %{http_c
 Gambar berikut menunjukkan hasil pemeriksaan akhir seluruh komponen infrastruktur pada Web1 dan Web2. Validasi mencakup konektivitas SSH, status service Nginx, validitas konfigurasi, ketersediaan user administrator, permission sudoers, HTTP response website, serta hasil pengujian idempotency.
 
 Hasil pemeriksaan memperlihatkan bahwa kedua managed servers berhasil mempertahankan konfigurasi sesuai kondisi yang diharapkan.
-
-![Final Infrastructure Validation](docs/screenshots/10-final-infrastructure-validation.png)
+![alt text](final.png)
 
 ---
 
